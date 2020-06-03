@@ -49,7 +49,7 @@
                       <a href="${s:mvcUrl('cad_prof').build() }"  class="btn btn-outline-light">Especialista</a>
                     </div>
                     <div class="col-md-4">
-                      <a href="c-hospital.html"  class="btn btn-outline-light">Clinica / Hospital</a>
+                      <a href="${s:mvcUrl('cad_cli').build() }"  class="btn btn-outline-light">Clinica / Hospital</a>
                     </div>
                   </div>
                 </div>

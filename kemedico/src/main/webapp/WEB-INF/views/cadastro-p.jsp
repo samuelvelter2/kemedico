@@ -40,18 +40,13 @@
 				<div class="col-md-4">
 					<br> <br> <br>
 					<h2>Crie sua conta</h2>
-					<form action="/healthclinics/cadastro/paciente" method="post">
+					<form action="${s:mvcUrl('cad_pac_bd').build()}" method="post">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Nome*</label> <input
-								name="nomePaciente" type="text" class="form-control"
+								name="nomeCompleto" type="text" class="form-control"
 								id="exampleInputEmail1" aria-describedby="emailHelp"
 								placeholder="">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Sobrenome*</label> <input
-								name="sobreNome" type="text" class="form-control"
-								id="exampleInputEmail1" aria-describedby="emailHelp"
-								placeholder="">
+						
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Endereço de e-mail *</label> <input
@@ -83,7 +78,9 @@
 							<label for="exampleInputPassword1">CPF*</label> <input
 								name="numeroCPF" type="text" class="form-control"
 								id="exampleInputPassword1" placeholder="">
-						</div>						
+						</div>
+						</div>
+												
 						
 						<div class="form-check">
 							<input type="checkbox" class="form-check-input"

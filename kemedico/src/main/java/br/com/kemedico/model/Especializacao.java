@@ -1,22 +1,24 @@
 package br.com.kemedico.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
+import org.bson.types.ObjectId;
 
 @Entity
 public class Especializacao {
 	@Id
-	private int idEsp;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private ObjectId idEsp;
 	private String descEsp;
-	@ManyToMany
-	private Set<ProfissionalSaude> profissionais;
-	public int getIdEsp() {
+	
+	
+	public ObjectId getIdEsp() {
 		return idEsp;
 	}
-	public void setIdEsp(int idEsp) {
+	public void setIdEsp(ObjectId idEsp) {
 		this.idEsp = idEsp;
 	}
 	public String getDescEsp() {
@@ -25,12 +27,11 @@ public class Especializacao {
 	public void setDescEsp(String descEsp) {
 		this.descEsp = descEsp;
 	}
-	public Set<ProfissionalSaude> getProfissionais() {
-		return profissionais;
+	@Override
+	public String toString() {
+		return "Especializacao [idEsp=" + idEsp.toString() + ", descEsp=" + descEsp + "]";
 	}
-	public void setProfissionais(Set<ProfissionalSaude> profissionais) {
-		this.profissionais = profissionais;
-	}
+	
 	
 	
 	

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ include file="/WEB-INF/views/cabecalho.jsp"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,12 +26,27 @@
 <!-- HTML5Shiv -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <![endif]-->
+    <![endif]--> 
 
 <!-- Estilo customizado -->
 <link rel="stylesheet" type="text/css"
 	href='<c:url value = "/resources/css/estilo.css"></c:url>'>
-
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('.form-dropdown').select2();
+	});
+</script>
 <title>Health Clinics - Cadastro E</title>
 </head>
 <body>
@@ -61,50 +77,86 @@
 				<div class="col-md-4">
 					<br> <br> <br>
 					<h2>Crie sua conta Gratuita*</h2>
-					<form method="POST" action="${s:mvcUrl('cad_prof_bd').build()}">
+					<form:form method="POST"
+						action="${s:mvcUrl('cad_prof_bd').build()}"
+						modelAttribute="profsaude"  enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="exampleInputPassword1">Nome*</label> <input
-								name="nomeprofsau" class="form-control" type="text"
+							<label for="exampleInputEmail1">Nome*</label> <input
+								name="nomeCompleto" type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp"
+								placeholder="">
+
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Endereço de e-mail *</label> <input
+								name="email" type="email" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp"
 								placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Sobrenome*</label> <input
-								name="sobrenomeprof" class="form-control" type="text"
-								placeholder="">
+							<label for="exampleInputPassword1">Crie uma senha *</label> <input
+								name="senhaP" type="password" class="form-control"
+								id="exampleInputPassword1" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlInput1">E-mail - Usando
-								dentro da HS</label> <input type="email" class="form-control"
-								name="email" id="exampleFormControlInput1" placeholder="">
+							<label for="exampleInputPassword1">Repita a senha *</label> <input
+								name="senhaRepetir" type="password" class="form-control"
+								id="exampleInputPassword1" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Celular</label> <input
-								class="form-control" type="text" name="numeroCelular"
-								placeholder="Ex: +55 (11) 99977-0000">
+							<label for="exampleInputPassword1">Telefone*</label> <input
+								name="numeroCelular" type="text" class="form-control"
+								id="exampleInputPassword1" placeholder="">
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlSelect1">Especialidade</label> <select class="formControl"
-								name="especialidade">
+							<label for="exampleInputPassword1">Data de Nascimento*</label> <input
+								name="dataNasc" type="date" class="form-control"
+								id="exampleInputPassword1" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">CPF*</label> <input
+								name="numeroCPF" type="text" class="form-control"
+								id="exampleInputPassword1" placeholder="">
+						</div>
+
+						<div class="form-group">
+							<label for="exampleFormControlSelect1">Especialidade</label>
+							
+
+						<form:select id="exampleInputPassword1"
+								path="especializacao.idEsp" class="form-dropdown" name="especialidade">
+								<form:option value="" selected="selected" hidden="hidden" disabled="true">-- Escolher Uma --</form:option>
+								<form:options items="${especialidades}" itemValue="idEsp"
+									itemLabel="descEsp" />
+							</form:select>
+							</div>
+						<!--  <div class="form-group">
+							<label for="exampleFormControlSelect1">Especialidade</label> <select
+								class="form-dropdown" name="especialidade">
 								<c:forEach items="${especialidades}" var="es">
 									<option value="${es.idEsp}">${es.descEsp}</option>
 								</c:forEach>
 							</select>
-						
+							</div>	-->					
 
 
-						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">CRM*</label> <input
-								class="form-control" type="text"
+								class="form-control" type="text" name="crm"
 								placeholder="Preencha esse campo ele é obrigatório.">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Foto de Perfil*</label> <input
+								name="fotoPerfilp" type="file" class="form-control"
+								id="exampleInputPassword1" accept="image/*">
 						</div>
 						<!--<div class="form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">* Eu aceito <a href="temos.html" class="text-warning">os termos e condições</a>, e a <a href="privacidade" class="text-warning">política de privacidade</a> da Doctoralia.</label>
                 </div>-->
 						<br>
-						<button type = "submit" class="btn btn-outline-light ">Cadastrar</button>
-					</form>
+						<button type="submit" class="btn btn-outline-light ">Cadastrar</button>
+					</form:form>
 
 				</div>
 
@@ -116,7 +168,7 @@
 
 	<!-- JavaScript (Opcional) -->
 	<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 	<script
@@ -126,7 +178,8 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script>-->
 </body>
 </html>
+
 <%@ include file="/WEB-INF/views/rodape.jsp"%>

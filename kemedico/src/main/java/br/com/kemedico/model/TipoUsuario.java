@@ -1,5 +1,7 @@
 package br.com.kemedico.model;
 
+import java.math.BigInteger;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,12 +9,12 @@ import javax.persistence.Id;
 
 public class TipoUsuario {
 	@Id	
-	private int codigo_tipo;
+	private BigInteger codigo_tipo;
 	private String desc_tipo;
-	public int getCodigo_tipo() {
+	public BigInteger getCodigo_tipo() {
 		return codigo_tipo;
 	}
-	public void setCodigo_tipo(int codigo_tipo) {
+	public void setCodigo_tipo(BigInteger codigo_tipo) {
 		this.codigo_tipo = codigo_tipo;
 	}
 	public String getDesc_tipo() {

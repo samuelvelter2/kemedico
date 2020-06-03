@@ -1,72 +1,30 @@
 package br.com.kemedico.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_Paciente")
+@Table(name = "Paciente")
 public class Paciente extends Usuario {
-	private String nomePaciente;
-	private String sobreNome;
-	private LocalDate dataNascimento;
-	private String numeroCelular;
-	private String cpf;
-
-	public String getNomePaciente() {
-		return nomePaciente;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String rg;
+	private String apelido;
+	public String getRg() {
+		return rg;
 	}
 
-	public void setNomePaciente(String nome) {
-		this.nomePaciente = nome;
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
+	public String getApelido() {
+		return apelido;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getNumeroCelular() {
-		return numeroCelular;
-	}
-
-	public void setNumeroCelular(String numeroCelular) {
-		this.numeroCelular = numeroCelular;
-	}
-
-	public String getEmail() {
-		return super.getEmail();
-	}
-
-	public void setEmail(String email) {
-		super.setEmail(email);
-	}
-
-	public String getSobreNome() {
-		return sobreNome;
-	}
-
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
-	}
-
-	@Override
-	public String toString() {
-		return "Paciente [" + super.toString() + "nome=" + nomePaciente + ", sobreNome=" + sobreNome
-				+ ", dataNascimento=" + dataNascimento + ", numeroCelular=" + numeroCelular + ", cpf=" + cpf + ", rg="
-				+ "]";
-	}
-
 }
