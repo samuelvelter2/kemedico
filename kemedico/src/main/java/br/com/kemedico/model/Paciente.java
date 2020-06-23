@@ -3,8 +3,6 @@ package br.com.kemedico.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.search.annotations.Field;
-
 @Entity
 public class Paciente extends Usuario {
 	/**
