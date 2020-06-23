@@ -1,45 +1,41 @@
 package br.com.kemedico.model;
 
-import java.util.List;
-
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-import org.bson.types.ObjectId;
+import org.hibernate.search.annotations.Indexed;
 
 @Entity
+@Embeddable
+@Indexed
 public class PlanoSaude {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	ObjectId id;
-	String nomePlano;
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Clinica> clinicas;
-	public ObjectId getId() {
-		return id;
-	}
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long id;
+	private String nomePlano;
+
 	public String getNomePlano() {
 		return nomePlano;
 	}
+
 	public void setNomePlano(String nomePlano) {
 		this.nomePlano = nomePlano;
 	}
-	public List<Clinica> getClinicas() {
-		return clinicas;
-	}
-	public void setClinicas(List<Clinica> clinicas) {
-		this.clinicas = clinicas;
-	}
+
 	@Override
 	public String toString() {
-		return "PlanoSaude [id=" + id + ", nomePlano=" + nomePlano + ", clinicas=" + clinicas + "]";
+		return "PlanoSaude [id=" + id + ", nomePlano=" + nomePlano + "]";
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 }

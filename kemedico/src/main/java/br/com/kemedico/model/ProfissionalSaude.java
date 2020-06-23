@@ -6,11 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ProfissionalSaude")
+
 public class ProfissionalSaude extends Usuario {
 	/**
 	 * 
@@ -18,27 +20,44 @@ public class ProfissionalSaude extends Usuario {
 	private static final long serialVersionUID = 1L;
 	private String crm;
 	@ManyToOne
+	
 	private Especializacao especializacao1;
 	@ManyToOne
+	
 	private Especializacao especializacao2;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Clinica> clinicas;
 	@OneToOne
 	private Foto fotoPerfil;
+
 	private String CEP;
-	@ManyToOne
-	private UF uf;
+
 	@ManyToOne
 	private Cidade cidade;
+
 	@ManyToOne
 	private Bairro bairro;
-	private int numero;
+
+	private String rua;
+
+	private String numero;
+
 	private String complemento;
+
+	private String nomeConsultorio;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<PlanoSaude> planosParticular;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<MeioPagamento> meiosPagamento;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Foto> fotosConsultorio;
+	@ManyToOne
+	private PrecoCifrao cifroes;
+	private Double mediaAvaliada;
+
 	private boolean premium;
+
 	public String getCrm() {
 		return crm;
 	}
@@ -79,11 +98,11 @@ public class ProfissionalSaude extends Usuario {
 		this.bairro = bairro;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -101,14 +120,6 @@ public class ProfissionalSaude extends Usuario {
 
 	public void setCEP(String cEP) {
 		CEP = cEP;
-	}
-
-	public UF getUf() {
-		return uf;
-	}
-
-	public void setUf(UF uf) {
-		this.uf = uf;
 	}
 
 	public List<PlanoSaude> getPlanosParticular() {
@@ -149,6 +160,114 @@ public class ProfissionalSaude extends Usuario {
 
 	public void setPremium(boolean premium) {
 		this.premium = premium;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public List<Foto> getFotosConsultorio() {
+		return fotosConsultorio;
+	}
+
+	public void setFotosConsultorio(List<Foto> fotosConsultorio) {
+		this.fotosConsultorio = fotosConsultorio;
+	}
+
+	@Override
+	public String toString() {
+		return "ProfissionalSaude [crm=" + crm + ", especializacao1=" + especializacao1 + ", especializacao2="
+				+ especializacao2 + ", clinicas=" + clinicas + ", fotoPerfil=" + fotoPerfil + ", CEP=" + CEP
+				+ ", cidade=" + cidade + ", bairro=" + bairro + ", rua=" + rua + ", numero=" + numero + ", complemento="
+				+ complemento + ", planosParticular=" + planosParticular + ", meiosPagamento=" + meiosPagamento
+				+ ", cifroes=" + cifroes + ", premium=" + premium + "[" + super.toString() + "]";
+	}
+
+	public String getNomeConsultorio() {
+		return nomeConsultorio;
+	}
+
+	public void setNomeConsultorio(String nomeConsultorio) {
+		this.nomeConsultorio = nomeConsultorio;
+	}
+
+	public void setCifroes(PrecoCifrao cifroes) {
+		this.cifroes = cifroes;
+	}
+
+	public ProfissionalSaude getAtualizado(ProfissionalSaude prof) {
+		if (this.crm == null) {
+			this.crm = prof.getCrm();
+		}
+		if (this.especializacao1 == null) {
+			this.especializacao1 = prof.getEspecializacao1();
+		}
+		if (this.clinicas == null) {
+			this.clinicas = prof.getClinicas();
+		}
+		if (this.fotoPerfil == null) {
+			this.fotoPerfil = prof.getFotoPerfil();
+		}
+		if (this.CEP == null) {
+			this.CEP = prof.getCEP();
+		}
+		if (this.cidade == null) {
+			this.cidade = prof.getCidade();
+		}
+		if (this.rua == null) {
+			this.rua = prof.getRua();
+		}
+		if (this.numero == null) {
+			this.numero = prof.getNumero();
+		}
+		if (this.complemento == null) {
+			this.complemento = prof.getComplemento();
+		}
+		if (this.nomeConsultorio == null) {
+			this.nomeConsultorio = prof.getNomeConsultorio();
+		}
+		if (this.planosParticular == null) {
+			this.planosParticular = prof.getPlanosParticular();
+		}
+		if (this.meiosPagamento == null) {
+			this.meiosPagamento = prof.getMeiosPagamento();
+		}
+		if (this.fotosConsultorio == null) {
+			this.fotosConsultorio = prof.getFotosConsultorio();
+		}
+		if (this.cifroes == null) {
+			this.cifroes = prof.getCifroes();
+		}
+		if (this.premium == false) {
+			this.premium = prof.isPremium();
+		}
+		super.getAtualizado(prof);
+
+		return this;
+
+	}
+
+	public PrecoCifrao getCifroes() {
+		return cifroes;
+	}
+	public int getCifroesInt() {
+		return cifroes.getCifroes();
+	}
+
+	public Double getMediaAvaliada() {
+		return mediaAvaliada;
+	}
+
+	public void setMediaAvaliada(Double mediaAvaliada) {
+		this.mediaAvaliada = mediaAvaliada;
 	}
 
 }

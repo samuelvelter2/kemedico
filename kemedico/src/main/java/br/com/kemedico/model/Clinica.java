@@ -6,44 +6,46 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.bson.types.ObjectId;
 @Entity
-public class Clinica extends Usuario{
-	
+public class Clinica extends Usuario{	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private ObjectId id;
-	private String nomeClinica;
+	private static final long serialVersionUID = 1L;	
 	private String cnpj;
-	private String CEP;
-	@ManyToOne
-	private UF uf;
+	private String CEP;	
 	@ManyToOne
 	private Cidade cidade;
 	@ManyToOne
 	private Bairro bairro;
-	private int numero;
+	private String numero;
 	private String complemento;
+	private String rua;
 	private String numeroLocal;
-	private boolean premium;	
+	private String enderecoCompleto;
+	private Boolean premium;
+	@ManyToOne
+	private PrecoCifrao cifroes;
+	private String numeroFixo;
+	@OneToOne
+	private Foto fotoPerfil;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Foto> fotosClinica;
+	
 	@OneToOne
 	private ProfissionalSaude profResp;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<PlanoSaude> planos;	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<ProfissionalSaude> profissionaisSaude;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<MeioPagamento> meiosPagamento;
-	public String getNomeClinica() {
-		return nomeClinica;
-	}
-	public void setNomeClinica(String nomeClinica) {
-		this.nomeClinica = nomeClinica;
-	}
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Especializacao> especialidades;
+	private Double mediaAvaliada;
+	
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -63,12 +65,7 @@ public class Clinica extends Usuario{
 		this.numeroLocal = numeroLocal;
 	}
 	
-	public ObjectId getId() {
-		return id;
-	}
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
+	
 	public List<ProfissionalSaude> getProfissionaisSaude() {
 		return profissionaisSaude;
 	}
@@ -86,13 +83,8 @@ public class Clinica extends Usuario{
 	}
 	public void setPlanos(List<PlanoSaude> planos) {
 		this.planos = planos;
-	}	
-	public UF getUf() {
-		return uf;
 	}
-	public void setUf(UF uf) {
-		this.uf = uf;
-	}
+	
 	public Cidade getCidade() {
 		return cidade;
 	}
@@ -111,10 +103,10 @@ public class Clinica extends Usuario{
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public List<MeioPagamento> getMeiosPagamento() {
@@ -123,11 +115,136 @@ public class Clinica extends Usuario{
 	public void setMeiosPagamento(List<MeioPagamento> meiosPagamento) {
 		this.meiosPagamento = meiosPagamento;
 	}
-	public boolean isPremium() {
+	public Boolean isPremium() {
 		return premium;
 	}
-	public void setPremium(boolean premium) {
+	public void setPremium(Boolean premium) {
 		this.premium = premium;
+	}
+	public String getEnderecoCompleto() {
+		return enderecoCompleto;
+	}
+	public void setEnderecoCompleto(String enderecoCompleto) {
+		this.enderecoCompleto = enderecoCompleto;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public Boolean getPremium() {
+		return premium;
+	}
+	
+	public Foto getFotoPerfil() {
+		return fotoPerfil;
+	}
+	public void setFotoPerfil(Foto fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
+	}
+	public List<Foto> getFotosClinica() {
+		return fotosClinica;
+	}
+	public void setFotosClinica(List<Foto> fotosClinica) {
+		this.fotosClinica = fotosClinica;
+	}
+	public List<Especializacao> getEspecialidades() {
+		return especialidades;
+	}
+	public void setEspecialidades(List<Especializacao> especialidades) {
+		this.especialidades = especialidades;
+	}
+	public String getNumeroFixo() {
+		return numeroFixo;
+	}
+	public void setNumeroFixo(String numeroFixo) {
+		this.numeroFixo = numeroFixo;
+	}
+	public String getRua() {
+		return rua;
+	}
+	public void setRua(String rua) {
+		this.rua = rua;
+	}	
+	public Clinica getAtualizado(Clinica cli) {
+		if (this.cnpj == null) {
+			this.cnpj = cli.getCnpj();
+		}
+		if (this.CEP == null) {
+			this.CEP = cli.getCEP();
+		}
+		if (this.cidade == null) {
+			this.cidade = cli.getCidade();
+		}
+		if (this.bairro == null) {
+			this.bairro = cli.getBairro();
+		}
+		if (this.numero == null) {
+			this.numero = cli.getNumero();
+		}
+		if (this.complemento == null) {
+			this.complemento = cli.getComplemento();
+		}
+		if (this.rua == null) {
+			this.rua = cli.getRua();
+		}
+		if (this.numeroLocal == null) {
+			this.numeroLocal = cli.getNumeroLocal();
+		}
+		if (this.enderecoCompleto == null) {
+			this.enderecoCompleto = cli.getEnderecoCompleto();
+		}		
+			this.premium = cli.isPremium();
+		
+		if (this.cifroes == null) {
+			this.cifroes = cli.getCifroes();
+		}
+		if (this.numeroFixo == null) {
+			this.numeroFixo = cli.getNumeroFixo();
+		}
+		if (this.fotoPerfil == null) {
+			this.fotoPerfil = cli.getFotoPerfil();			
+		}
+		if (this.fotosClinica == null) {
+			this.fotosClinica = cli.getFotosClinica();
+		}
+		if (this.profResp == null) {
+			this.profResp = cli.getProfResp();
+		}
+		if (this.planos == null) {
+			this.planos = cli.getPlanos();
+		}
+		if (this.profissionaisSaude == null) {
+			this.profissionaisSaude = cli.getProfissionaisSaude();
+		}
+		if (this.meiosPagamento == null) {
+			this.meiosPagamento = cli.getMeiosPagamento();
+		}
+		if (this.especialidades == null) {
+			this.especialidades = cli.getEspecialidades();
+		}
+		super.getAtualizado(cli);
+		
+		return this;
+	}
+	public PrecoCifrao getCifroes() {
+		return cifroes;
+	}
+	public void setCifroes(PrecoCifrao cifroes) {
+		this.cifroes = cifroes;
+	}
+	@Override
+	public String toString() {
+		return "Clinica [cnpj=" + cnpj + ", CEP=" + CEP + ", cidade=" + cidade + ", bairro=" + bairro + ", numero="
+				+ numero + ", complemento=" + complemento + ", rua=" + rua + ", numeroLocal=" + numeroLocal
+				+ ", enderecoCompleto=" + enderecoCompleto + ", premium=" + premium + ", cifroes=" + cifroes
+				+ ", numeroFixo=" + numeroFixo + ", fotoPerfil=" + fotoPerfil + ", fotosClinica=" + fotosClinica
+				+ ", profResp=" + profResp + ", planos=" + planos + ", profissionaisSaude=" + profissionaisSaude
+				+ ", meiosPagamento=" + meiosPagamento + ", especialidades=" + especialidades + super.toString()+ "]";
+	}
+	public Double getMediaAvaliada() {
+		return mediaAvaliada;
+	}
+	public void setMediaAvaliada(Double mediaAvaliada) {
+		this.mediaAvaliada = mediaAvaliada;
 	}
 	
 	

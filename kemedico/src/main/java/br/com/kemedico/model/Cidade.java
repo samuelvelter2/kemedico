@@ -6,34 +6,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.bson.types.ObjectId;
-
 @Entity
 public class Cidade {
+
+	public Cidade(UF ufCidade, String nomeCidade) {
+		this.ufCidade = ufCidade;
+		this.nomeCidade = nomeCidade;
+		this.nomeComUF = nomeCidade + " - " + ufCidade.getSgUF();
+	}
+
+	public Cidade() {
+		super();
+	}
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId idCidade;
-	private int codigoIBGE;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long idCidade;
 	@ManyToOne
 	private UF ufCidade;
 	private String nomeCidade;
 	private String nomeComUF;
 
-	public ObjectId getIdCidade() {
-		return idCidade;
-	}
-
-	public void setIdCidade(ObjectId idCidade) {
-		this.idCidade = idCidade;
-	}
-
-	public int getCodigoIBGE() {
-		return codigoIBGE;
-	}
-
-	public void setCodigoIBGE(int codigoIBGE) {
-		this.codigoIBGE = codigoIBGE;
-	}
+	
 
 	public UF getUfCidade() {
 		return ufCidade;
@@ -57,6 +51,14 @@ public class Cidade {
 
 	public void setNomeComUF(String nomeComUF) {
 		this.nomeComUF = nomeComUF;
+	}
+
+	public long getIdCidade() {
+		return idCidade;
+	}
+
+	public void setIdCidade(long idCidade) {
+		this.idCidade = idCidade;
 	}
 
 }

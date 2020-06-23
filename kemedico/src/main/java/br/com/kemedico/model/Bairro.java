@@ -4,23 +4,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.bson.types.ObjectId;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Bairro {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId idBairro;
-	private String nomeBairro;
-
-	public ObjectId getIdBairro() {
-		return idBairro;
-	}
-
-	public void setIdBairro(ObjectId idBairro) {
+	
+	public Bairro(long idBairro, String nomeBairro, Cidade cidade) {
+		super();
 		this.idBairro = idBairro;
+		this.nomeBairro = nomeBairro;
+		this.cidade = cidade;
 	}
+	public Bairro() {
+		super();
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long idBairro;
+	private String nomeBairro;
+	public Bairro(String nomeBairro, Cidade cidade) {
+		super();
+		this.nomeBairro = nomeBairro;
+		this.cidade = cidade;
+	}
+
+	@ManyToOne
+	private Cidade cidade;
+
+	
 
 	public String getNomeBairro() {
 		return nomeBairro;
@@ -28,6 +40,20 @@ public class Bairro {
 
 	public void setNomeBairro(String nomeBairro) {
 		this.nomeBairro = nomeBairro;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+	public long getIdBairro() {
+		return idBairro;
+	}
+	public void setIdBairro(long idBairro) {
+		this.idBairro = idBairro;
 	}
 
 }

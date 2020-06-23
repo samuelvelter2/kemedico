@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/WEB-INF/views/cabecalho.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -30,154 +31,113 @@
 	href='<c:url value = "/resources/css/estilo.css"></c:url>'>
 
 
-<title>Health Clinics</title>
+<title>Kemédico - Nós temos médicos</title>
+
+<script>
+	$(document).ready(function() {
+		$("#select-especialidade").select2({
+
+		});
+		$("#select-cidade").select2({
+
+		});
+		$("#select-plano").select2({
+
+		});
+
+	});
+</script>
 
 </head>
 <body>
-
-
-
 	<section id="servicos" class="caixa">
 		<div class="container text-center ">
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8 ">
-					<br> <br> <img src='<c:url value = "/resources/imagens/lg-kemedico.png"></c:url>'
+					<br> <br> <img
+						src='<c:url value = "/resources/imagens/lg-kemedico.png"></c:url>'
 						width="600px">
 				</div>
 			</div>
 			<div class="col-md-2"></div>
-			<form>
+			<form:form servletRelativeAction="${s:mvcUrl('pesquisar').build()}"
+				modelAttribute="pesquisa" method="get">
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="exampleFormControlSelect1">Qual especialista
-							você procura ?</label> <select class="form-control"
-							id="exampleFormControlSelect1">
-							<option></option>
-							<option>Anestesiologista</option>
-							<option>Clínica médica</option>
-							<option>Dermatologista</option>
-							<option>Cardiologista</option>
-							<option>Pscicólogo</option>
-							<option>Ginecologista</option>
-							<option>Homeopatia</option>
-							<option>Pediatra</option>
-							<option>Endocrinologista</option>
-							<option>Infectologista</option>
-							<option>Dentista</option>
-							<option>Neurocirurgista</option>
-							<option>Oncologista</option>
-							<option>Nutrologista</option>
-							<option>Geriatra</option>
-							<option>Neurologista</option>
-							<option>Oftalmologista</option>
-							<option>Ortopedista</option>
-							<option>Otorrinolaringologista</option>
-							<option>Fisioterapeuta</option>
-						</select>
+							você procura ?</label>
+						<form:select id="select-especialidade" path="especialidade.idEsp"
+							class="custom-select" name="especialidade" required="required">
+							<form:options class="text-center" items="${especialidades}"
+								itemValue="idEsp" itemLabel="descEsp" />
+						</form:select>
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="validationTextarea">Cidade-UF: *</label> <select
-							class="custom-select" required>
-							<option class="text-center"></option>
-							<option>Acre(AC)</option>
-							<option>Alagoas (AL)</option>
-							<option>Amapá (AP)</option>
-							<option>Amazonas (AM)</option>
-							<option>Bahia (BA)</option>
-							<option>Ceará (CE)</option>
-							<option>Distrito Federal (DF)</option>
-							<option>Espírito Santo (ES)</option>
-							<option>Goiás (GO)</option>
-							<option>Maranhão (MA)</option>
-							<option>Mato Grosso (MT)</option>
-							<option>Mato Grosso do Sul (MS)</option>
-							<option>Minas Gerais (MG)</option>
-							<option>Pará (PA)</option>
-							<option>Paraíba (PB)</option>
-							<option>Paraná (PR)</option>
-							<option>Pernambuco (PE)</option>
-							<option>Piauí (PI)</option>
-							<option>Rio de Janeiro (RJ)</option>
-							<option>Rio Grande do Norte (RN)</option>
-							<option>Rio Grande do Sul (RS)</option>
-							<option>Rondônia (RO)</option>
-							<option>Roraima (RR)</option>
-							<option>Santa Catarina (SC)</option>
-							<option>São Paulo (SP)</option>
-							<option>Sergipe (SE)</option>
-							<option>Tocantins (TO)</option>
+						<label for="validationTextarea">Cidade-UF: *</label>
+						<form:select id="select-cidade" path="cidade.idCidade"
+							class="custom-select" name="cidade" required="required">
+							<form:options class="text-center" items="${cidades}"
+								itemValue="idCidade" itemLabel="nomeComUF" />
+						</form:select>
 
-						</select>
+
 					</div>
+
 				</div>
 
 
 				<div class="form-row col-md-12  text-center">
 					<fieldset class="form-group">
-						<div class="row ">
+						<div class="row  ">
 							<legend class="col-form-label col-sm-5 text-center ">Possue
 								algum convenio de saúde?</legend>
+							<div class="form-check  col-md-4  float-right ">
 
-							<div class="col-sm-5text-center">
+								<input type="radio" class="form-check-input" id="exampleCheck1"
+									name="tipoPesquisa" checked="checked" value="med"> <label
+									class="form-check-label pr-5 text-center  " for="exampleCheck1">Médicos</label>
+
+								<input type="radio" class="form-check-input" id="exampleCheck2"
+									name="tipoPesquisa" value="cli"> <label
+									class="form-check-label p-1 " for="exampleCheck2">Clínicas</label>
+
+							</div>
+							<div class="col-sm-5 text-center">
 								<div class="input-group">
 									<span class="input-group-addon"> <label
 										class="radio-inline" for="radios-0"> <input
-											type="radio" name="convenio" id="convenio" value="nao"
-											onclick="desabilita('convenio_qtd')" required> Não
+											type="radio" name="convenio" id="convenio" value="false"
+											onclick='desabilita("select-plano")' required> Não
 									</label> <label class="radio-inline p-2 text-center" for="radios-1">
-											<input type="radio" name="convenio" id="convenio" value="sim"
-											onclick="habilita('convenio_qtd')"> Sim
-									</label> <label class="radio-inline p-2 text-center" for="radios-2">
 											<input type="radio" name="convenio" id="convenio"
-											value="outro" onclick="desabilita('convenio_qtd')">
-											Outro
+											value="true" onclick='habilita("select-plano")'
+											checked="checked"> Sim
 									</label>
-									</span> <select id="convenio_qtd" name="convenio_qtd" class="col-sm-6"
-										type="text" placeholder="Qual?" pattern="[0-9]+$">
-										<option selected></option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
+
+									</span>
 								</div>
+								<form:select id="select-plano" path="planos"
+									class="custom-select" name="planos" required="required"
+									itemLabel="selecione pelo menos um">
+									<form:options items="${planos}" itemValue="id"
+										itemLabel="nomePlano" />
+								</form:select>
+							</div>
+						</div>
 					</fieldset>
 
 
 
 				</div>
 
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#exampleModal">Pesquisar</button>
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Aviso!</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								Para pesquisar mais sobre os especialistas cadastre-se! <br>É
-								gratuito.
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Fechar</button>
-								<button type="button" class="btn btn-primary">
-									<a href="cadastro.html" class="text-white">Cadastrar</a>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
+
+
+				<button type="submit" class="btn btn-primary">Pesquisar</button>
+
+
+			</form:form>
 
 		</div>
 	</section>
@@ -194,13 +154,16 @@
 						data-ride="carousel">
 						<div class="carousel-inner">
 							<!--Inner -->
+							<div class="carousel-item">
+								<h1>Os melhores especialistas</h1>
+							</div>
 
 							<div class="carousel-item active">
-								<h1>Saúde para todos</h1>
+								<h1>Dentro de apenas uma plataforma</h1>
 							</div>
 
 							<div class="carousel-item">
-								<h1>Os melhores especialistas</h1>
+								<h1>Kémédico</h1>
 							</div>
 
 						</div>
@@ -239,26 +202,30 @@
 						especialista.Para que outras pessoas vejam.Tudo isso de forma
 						pratica e rápida, simples e rápida.</p>
 
-					<img src="imagens/estrela.png" class="rounded" width="150px">
+					<img src='<c:url value = "/resources/imagens/estrela.png"></c:url>'
+						class="rounded" width="150px">
 
 				</div>
 			</div>
+
 		</div>
 	</section>
 
 	<!-- JavaScript (Opcional) -->
 	<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	<!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script>-->
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
+
+
 </body>
 </html>
 <%@ include file="/WEB-INF/views/rodape.jsp"%>

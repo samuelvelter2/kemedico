@@ -4,18 +4,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.bson.types.ObjectId;
 @Entity
 public class MeioPagamento {
+	
+	public MeioPagamento(String descMeio) {
+		super();
+		this.descMeio = descMeio;
+	}
+	public MeioPagamento() {
+		super();
+	}
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId idMeio;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long idMeio;
 	private String descMeio;
-	public ObjectId getIdMeio() {
+	public long getIdMeio() {
 		return idMeio;
 	}
-	public void setIdMeio(ObjectId idMeio) {
+	public void setIdMeio(long idMeio) {
 		this.idMeio = idMeio;
 	}
 	public String getDescMeio() {
@@ -23,6 +29,10 @@ public class MeioPagamento {
 	}
 	public void setDescMeio(String descMeio) {
 		this.descMeio = descMeio;
+	}
+	@Override
+	public String toString() {
+		return "MeioPagamento [idMeio=" + idMeio + ", descMeio=" + descMeio + "]";
 	}
 	
 }

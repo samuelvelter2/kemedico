@@ -50,7 +50,7 @@
 
 	});
 </script>
-<title>Health Clinics - Cadastro do Especialista</title>
+<title>Health Clinics - Conta do Especialista</title>
 </head>
 <body>
 
@@ -65,43 +65,43 @@
 					<div class="row"></div>
 
 
-					<h2>Cadastro Especialista</h2>
+					<h2>Editando Epecialista</h2>
+
+					<img class="align-items-center"
+						src="${s:mvcUrl('foto').arg(0,profsaude.fotoPerfil.idFoto).build()}"
+						class="img-fluid" width="200px"> <br> <br> <br>
+					<br>
+
 
 
 					<form:form class="was-validated form-row"
-						servletRelativeAction="${s:mvcUrl('cad_prof_bd').build()}"
+						servletRelativeAction="${s:mvcUrl('update_prof').build()}"
 						enctype="multipart/form-data" modelAttribute="profsaude"
 						method="post">
 						<div class="col-lg-6 mb-4">
+							<input value="${profsaude.id }" hidden="true" name="id">
 							<label for="validationTextarea">Nome Completo: *</label> <input
 								type="text" class="form-control is-invalid" name="nomeCompleto"
-								id="validationTextarea" placeholder="Ex.:Jose Marto" required>
+								id="validationTextarea" placeholder="Ex.:Jose Marto"
+								value="${profsaude.nomeCompleto}" required>
 						</div>
 
 						<div class="col-lg-4 mb-4">
 							<label for="validationTextarea">Email: *</label> <input
 								type="text" class="form-control is-invalid" name="email"
 								id="validationTextarea" placeholder="Ex.:email@email.com"
-								required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+								required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+								required value="${profsaude.email}">
 						</div>
 						<div class="col-md-2 mb-4">
 							<label for="validationDefault04">Data de Nascimento*:</label> <input
 								id="dtnasc" name="dataNasc" placeholder="DD/MM/AAAA"
 								class="form-control input-md" required type="text"
 								maxlength="10" OnKeyPress="formatar('##/##/####', this)"
-								onBlur="showhide()" required>
+								onBlur="showhide()" value="${dataNasc}" required
+								disabled="disabled">
 						</div>
-						<div class="col-lg-3 mb-4">
-							<label for="validationTextarea">Senha: *</label> <input
-								type="password" class="form-control is-invalid" name="senhaP"
-								id="validationTextarea" required maxlength="12">
-						</div>
-						<div class="col-lg-3 mb-4">
-							<label for="validationTextarea">Repita a Senha: *</label> <input
-								type="password" class="form-control is-invalid"
-								name="senhaRepetir" id="validationTextarea" required
-								maxlength="12">
-						</div>
+
 
 
 
@@ -110,62 +110,69 @@
 								id="prependedtext" name="numeroCelular" class="form-control"
 								placeholder="XX XXXXX-XXXX" type="text" maxlength="13"
 								pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
-								OnKeyPress="formatar('## #####-####', this)" required>
+								OnKeyPress="formatar('## #####-####', this)"
+								value="${profsaude.numeroCelular}" required>
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer03">CEP* :</label> <input type="text"
 								class="form-control is-invalid" id="cep" name="CEP"
-								placeholder="Ex.:00000-000" maxlength="8" required
-								pattern="[0-9]+$">
+								placeholder="Ex.:00000-000" value="${profsaude.CEP}"
+								maxlength="8" required pattern="[0-9]+$">
 
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer04">Rua* :</label> <input type="text"
 								class="form-control is-invalid" id="rua" name="rua"
-								placeholder="Ex.:Cardoso dos Santos" required>
+								placeholder="Ex.:Cardoso dos Santos" value="${profsaude.rua}"
+								required>
 
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer05">N* :</label> <input type="text"
 								class="form-control is-invalid" id="validationServer05"
-								name="numero" placeholder="Ex.:Apt 80" required>
+								name="numero" placeholder="Ex.:Apt 80"
+								value="${profsaude.numero}" required>
 
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer05">Complemento* : </label> <input
 								type="text" class="form-control is-invalid" name="complemento"
-								id="validationServer05" placeholder="Ex.:Conjunto E" required>
+								id="validationServer05" placeholder="Ex.:Conjunto E"
+								value="${profsaude.complemento}" required>
 
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer05">Bairro* :</label> <input
 								type="text" class="form-control is-invalid" id="bairro"
-								name="bairro1" placeholder="Ex.:Sobradinho" required>
+								name="bairro1" placeholder="Ex.:Sobradinho"
+								value="${profsaude.bairro.nomeBairro}" required>
 
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer05">Cidade* :</label> <input
 								type="text" class="form-control is-invalid" id="cidade"
-								name="cidade1" placeholder="Ex.:São paulo" required>
+								name="cidade1" placeholder="Ex.:São paulo"
+								value="${profsaude.cidade.nomeCidade}" required>
 
 						</div>
 						<div class="col-lg-2 mb-3">
 							<label for="validationServer03">UF* :</label> <input type="text"
 								name="uf1" class="form-control is-invalid" id="uf" maxlength="2"
-								placeholder="Ex: DF" required>
+								value="${profsaude.cidade.ufCidade.sgUF}" placeholder="Ex: DF"
+								required>
 						</div>
 
 						<div class="col-lg-2 mb-4">
 							<label for="CRM">CRM: *</label> <input id="crm"
-								class="form-control is-invalid" required="required" value=""
-								name="crm" placeholder="Ex.:321321" maxlength="6"
-								pattern="[0-9]+$">
+								class="form-control is-invalid" required="required"
+								value="${profsaude.crm}" name="crm" placeholder="Ex.:321321"
+								maxlength="6" pattern="[0-9]+$">
 						</div>
 						<div class="col-lg-2 mb-4">
 							<label for="validationDefault03">CPF*:</label> <input id="cpf"
 								name="numeroCpf" placeholder="Apenas números"
 								class="form-control input-md" required type="text"
-								maxlength="14" required
+								maxlength="14" required value="${profsaude.numeroCpf}"
 								OnKeyPress="formatar('###.###.###-##', this)">
 						</div>
 						<div class="col-lg-3 mb-4">
@@ -173,7 +180,9 @@
 								Principal: *</label>
 							<form:select id="select-esp1" path="especializacao1.idEsp"
 								class="custom-select" name="esp2" required="required">
-								<option class="text-center"></option>
+								<option class="text-center"
+									label="${profsaude.especializacao1.descEsp}"
+									value="${profsaude.especializacao1.idEsp}" selected="selected"></option>
 								<form:options class="text-center" items="${especialidades}"
 									itemValue="idEsp" itemLabel="descEsp" />
 							</form:select>
@@ -185,8 +194,10 @@
 							<label for="validationTextarea" id="ck">Especialização
 								adicional(opcional): </label>
 							<form:select id="select-esp2" path="especializacao2.idEsp"
-								class="custom-select" name="esp2">
-								<option class="text-center"></option>
+								class="custom-select" name="esp2" required="required">
+								<option class="text-center"
+									label="${profsaude.especializacao2.descEsp}"
+									value="${profsaude.especializacao2.idEsp}" selected="selected"></option>
 								<form:options class="text-center" items="${especialidades}"
 									itemValue="idEsp" itemLabel="descEsp" />
 							</form:select>
@@ -197,6 +208,10 @@
 							<form:select id="select-plano" path="planosParticular"
 								class="custom-select" name="planos" multiple="true"
 								itemLabel="selecione pelo menos um">
+								<c:forEach items="${prof.planosParticular }" var="plano">
+									<option value="${plano.id }" label="${plano.nome}"
+										selected="selected"></option>
+								</c:forEach>
 								<form:options items="${planos}" itemValue="id"
 									itemLabel="nomePlano" />
 							</form:select>
@@ -207,6 +222,10 @@
 							<form:select id="select-meios" path="meiosPagamento"
 								class="custom-select" name="planos" multiple="true"
 								itemLabel="selecione pelo menos um">
+								<c:forEach items="${prof.meiosPagamento}" var="meio">
+									<option value="${meio.idMeio}" label="${meio.descMeio}"
+										selected="selected"></option>
+								</c:forEach>
 								<form:options items="${meios}" itemValue="idMeio"
 									itemLabel="descMeio" />
 							</form:select>
@@ -215,7 +234,8 @@
 							<label for="validationTextarea">Nome do Consultório
 								Particular(opcional): </label> <input type="text"
 								class="form-control is-invalid" name="nomeConsultorio"
-								id="validationTextarea" placeholder="Ex.:Jose Marto">
+								id="validationTextarea" value="${profsaude.nomeConsultorio}"
+								placeholder="Ex.:Jose Marto">
 						</div>
 						<div class="col-md-2 mb-3">
 
@@ -223,8 +243,10 @@
 								<label for="validationTextarea">Preço da consulta *: </label>
 								<form:select class="custom-select" required="required"
 									name="cifroes" path="cifroes.cifroes">
-									<form:options items="${cifroes}"
-										itemLabel="faixaPrecos" itemValue="cifroes" />
+									<option value="${profsaude.cifroes.cifroes}"
+										selected="selected" class="text-center"></option>
+									<form:options items="${cifroes}" itemLabel="faixaPrecos"
+										itemValue="cifroes" />
 
 								</form:select>
 							</div>
@@ -233,71 +255,25 @@
 
 						<hr class="col-md-12 ">
 						<div class="custom-file col-md-3 ">
-							<input name="fotoPerfilp" type="file" class="custom-file-input"
+							<input name="fotoPerfilP" type="file" class="custom-file-input"
 								id="exampleInputPassword1" accept="image/*"> <label
 								for="exampleFileLang " for="validationDefault05"
 								class="custom-file-label">Escolha uma foto de perfil</label>
 
 						</div>
-
-
-
-
-
-
-						<hr class="col-md-12 ">
-						<!-- --------------------------------------- -->
-
-
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="premium"
-								id="exampleRadios1" value="false" checked> <label
-								for="exampleRadios1"> Conta Gratuita </label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="premium"
-								id="exampleRadios2" value="true"> <label
-								for="exampleRadios2"> Conta Premium </label>
-						</div>
-
-						<div class="form-check-inline col-md-12" data-toggle="modal"
-							data-target="#exampleModal ">
-							<input type="checkbox" class="form-check-input"
-								id="exampleCheck1"> <label
-								class="form-check-label text-white" for="exampleCheck1"><a
-								href="" class="text-white">* Eu aceito os termos e
-									condições, e a política de privacidade da kemedico.</a></label>
-						</div>
-						<div class="modal fade" id="exampleModal" tabindex="-1"
-							role="dialog" aria-labelledby="exampleModalLabel"
-							aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title " id="exampleModalLabel"
-											style="color: black">Termo de autorização!</h5>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body ">
-										Eu concordo<br>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Fechar</button>
-
-									</div>
-								</div>
-							</div>
-						</div>
 						<!--<div class="form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">* Eu aceito <a href="temos.html" class="text-warning">os termos e condições</a>, e a <a href="privacidade" class="text-warning">política de privacidade</a> da Doctoralia.</label>
                 </div>-->
-						<br>
-						<button type="submit" class="btn btn-outline-light ">Cadastrar</button>
+						<hr class="col-md-12 ">
+						<div class="custom-file col-md-3 ">
+							<button type="submit" class="btn btn-outline-light">Salvar</button>
+
+						</div>
+						<div class="custom-file col-md-3 ">
+							<button type="button" class="btn btn-danger">Excluir
+								Conta</button>
+						</div>
 					</form:form>
 
 				</div>

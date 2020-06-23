@@ -8,30 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.bson.types.ObjectId;
-
 @Entity
 public class Avaliacao {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId id;
-	private double estrelas;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long id;
+	private int estrelas;
 	@ManyToOne
 	private ProfissionalSaude profSaude;
+	@ManyToOne
+	private Clinica clinica;
 	@ManyToOne
 	private Paciente paciente;
 	private LocalDateTime tempoAvaliacao;
 	
-	public ObjectId getId() {
-		return id;
-	}
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-	public double getEstrelas() {
+	
+	public int getEstrelas() {
 		return estrelas;
 	}
-	public void setEstrelas(double estrelas) {
+	public void setEstrelas(int estrelas) {
 		this.estrelas = estrelas;
 	}
 	public ProfissionalSaude getProfSaude() {
@@ -51,6 +46,15 @@ public class Avaliacao {
 	}
 	public void setTempoAvaliacao(LocalDateTime tempoAvaliacao) {
 		this.tempoAvaliacao = tempoAvaliacao;
+	}
+	public Clinica getClinica() {
+		return clinica;
+	}
+	public void setClinica(Clinica clinica) {
+		this.clinica = clinica;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }

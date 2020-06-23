@@ -16,30 +16,58 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.bson.types.ObjectId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Indexed
 public class Usuario implements UserDetails{
+	
+	public Usuario(String email, String senha, String nomeCompleto, String numeroCelular, LocalDate dataNascimento,
+			String numeroCpf, TipoUsuario tipoUsuario, List<Role> roles) {		
+		this.email = email;
+		this.senha = senha;
+		this.nomeCompleto = nomeCompleto;
+		this.numeroCelular = numeroCelular;
+		this.dataNascimento = dataNascimento;
+		this.numeroCpf = numeroCpf;
+		this.tipoUsuario = tipoUsuario;
+		this.roles = roles;
+	}
+	public Usuario() {
+		super();
+	}
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)	
+	private long id;
+	@Field
 	private String email;
+	@Field
 	private String senha;
+	@Field
 	private String nomeCompleto;
+	@Field
 	private String numeroCelular;
+	@Field
 	private LocalDate dataNascimento;
-	private String numeroCpf;
-	@ManyToOne
+	@Field
+	private String numeroCpf;	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@IndexedEmbedded
 	private TipoUsuario tipoUsuario;
 	@OneToMany(fetch = FetchType.EAGER)
+	@IndexedEmbedded
 	private List<Role> roles =  new ArrayList<Role>();
 
 	public String getEmail() {
@@ -58,13 +86,7 @@ public class Usuario implements UserDetails{
 		this.senha = senha;
 	}
 
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}	
+	
 
 	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
@@ -155,5 +177,46 @@ public class Usuario implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", nomeCompleto=" + nomeCompleto
+				+ ", numeroCelular=" + numeroCelular + ", dataNascimento=" + dataNascimento + ", numeroCpf=" + numeroCpf
+				+ ", tipoUsuario=" + tipoUsuario + ", roles=" + roles + "]";
+	}
+	public Usuario getAtualizado(Usuario usr) {		
+		if (this.senha == null) {
+			this.senha = usr.getSenha();
+		}
+		if (this.nomeCompleto == null) {
+			this.email = usr.getNomeCompleto();
+		}
+		if (this.numeroCelular == null) {
+			this.email = usr.getNumeroCelular();
+		}
+		if (this.dataNascimento == null) {
+			this.dataNascimento = usr.getDataNascimento();
+		}
+		if (this.numeroCpf == null) {
+			this.email = usr.getNumeroCpf();
+		}		
+		if (this.roles == null) {
+			this.roles = usr.getRoles();
+		}
+		if (this.tipoUsuario == null) {
+			this.tipoUsuario = usr.getTipoUsuario();
+		}
+		return this;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	
 }
