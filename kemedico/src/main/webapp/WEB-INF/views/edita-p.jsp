@@ -33,7 +33,7 @@
 <link rel="stylesheet" type="text/css"
 	href='<c:url value = "/resources/css/estilo.css"></c:url>'>
 
-<title>Kémédico - Cadastro Paciente</title>
+<title>Kémédico - Editar Paciente</title>
 
 </head>
 <body>
@@ -43,38 +43,38 @@
 				<div class="col-md-12">
 					<br> <br>
 					<hr class="col-md-4">
-					<h2>Cadastro Paciente</h2>
+					<h2>Editar Paciente</h2>
 					<form:form class="was-validated"
-						action="${s:mvcUrl('cad_pac_bd').build()}" method="post"
-						modelAttribute="paciente">
+						action="${s:mvcUrl('pac_updt').build()}" method="post"
+						modelAttribute="pac">
 						<div class="form-row">
 							<div class="col-md-5 mb-3">
 								<label for="validationDefault01">Nome completo*:</label> <input
 									id="Nome" name="nomeCompleto" placeholder="Ex.:Marcio Jose"
-									class="form-control input-md" required type="text" required>
+									class="form-control input-md" value="${pac.nomeCompleto }" required type="text" required>
 							</div>
 							<div class="col-md-3 mb-3">
 								<label for="validationDefault01">Nick*:</label> <input id="Nome"
 									name="apelido" placeholder="Ex.:Marcinho"
-									class="form-control input-md" required type="text" required>
+									class="form-control input-md" value="${pac.apelido}" required type="text" required>
 							</div>
 							<div class="col-md-3 mb-3">
 								<label for="validationDefault02">Email*:</label> <input
 									id="prependedtext" name="email" class="form-control"
-									placeholder="email@email.com" required type="text"
+									placeholder="email@email.com" required type="text" value="${pac.email }"
 									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
 							</div>
 							<div class="form-row">
 								<div class="col-md-3 mb-3">
 									<label for="validationDefault03">CPF*:</label> <input id="cpf"
-										name="numeroCPF" placeholder="Apenas números"
+										name="numeroCPF" placeholder="Apenas números" value="${pac.numeroCpf}"
 										class="form-control input-md" required type="text"
-										maxlength="14" pattern="[0-9]+$" required OnKeyPress="formatar('###.###.###-##', this)">
+										maxlength="14"  required OnKeyPress="formatar('###.###.###-##', this)">
 								</div>
 								<div class="col-md-4 mb-3">
 									<label for="validationDefault04">Data de Nascimento*:</label> <input
 										id="dtnasc" name="dataNasc" placeholder="DD/MM/AAAA"
-										class="form-control input-md" required type="text"
+										class="form-control input-md" required type="text" value="${dataNasc}"
 										maxlength="10" OnKeyPress="formatar('##/##/####', this)"
 										onBlur="showhide()" required>
 								</div>
@@ -82,7 +82,7 @@
 									<label for="validationDefault05">Telefone Celular*:</label> <input
 										id="prependedtext" name="prependedtext" class="form-control"
 										placeholder="XX XXXXX-XXXX" type="text" maxlength="13"
-										pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+										pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" value="${numeroCelular}"
 										OnKeyPress="formatar('## #####-####', this)" required>
 								</div>
 							</div>
@@ -113,17 +113,7 @@
 
 
 							</div>
-							<div class="col-md-2 mb-3">
-								<label for="validationDefault05">Senha*:</label> <input
-									type="password" class="form-control" id="validationDefault05"
-									placeholder="Informe sua senha" name="senhaP" value="" required>
-							</div>
-							<div class="col-md-2 mb-3">
-								<label for="validationDefault05">Repetir Senha*:</label> <input
-									type="password" class="form-control" id="validationDefault05"
-									placeholder="Repita a senha" name="senhaRepetir" value=""
-									required>
-							</div>
+							
 							<div class="form-check col-md-12 m-4">
 								<input type="checkbox" class="form-check-input"
 									id="exampleCheck1" name="check" required="required"> <label
@@ -132,8 +122,12 @@
 									kemedico.</label>
 
 							</div>
-							<button type="submit" class="btn btn-outline-light">Cadastrar</button>
-						</div>
+							<div class="custom-file col-md-3">
+							<button type="submit" class="btn btn-outline-light">Atualizar</button>
+						</div>		
+						<div class="custom-file col-md-3">
+							<button type="button" class="btn btn-danger">Excluir Conta</button>
+							</div>
 
 					</form:form>
 

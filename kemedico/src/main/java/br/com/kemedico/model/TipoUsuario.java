@@ -1,26 +1,37 @@
 package br.com.kemedico.model;
 
-import java.math.BigInteger;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 
-public class TipoUsuario {
-	@Id	
-	private BigInteger codigo_tipo;
-	private String desc_tipo;
-	public BigInteger getCodigo_tipo() {
-		return codigo_tipo;
+public class TipoUsuario implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public TipoUsuario(String desc_tipo) {		
+		this.desc_tipo = desc_tipo;
 	}
-	public void setCodigo_tipo(BigInteger codigo_tipo) {
-		this.codigo_tipo = codigo_tipo;
+	public TipoUsuario() {
+		super();
 	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long cod_tipo;
+	private String desc_tipo;	
 	public String getDesc_tipo() {
 		return desc_tipo;
 	}
 	public void setDesc_tipo(String desc_tipo) {
 		this.desc_tipo = desc_tipo;
+	}	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

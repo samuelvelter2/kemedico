@@ -1,120 +1,133 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ include file="/WEB-INF/views/cabecalho.jsp" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ include file="/WEB-INF/views/cabecalho.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <!-- Meta tags Obrigatórias -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <!-- HTML5Shiv -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <![endif]-->
-
-    <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" href="${contextPath}resources/css/estilo.css">
-
-    <title>Health Clinics - Login</title>
-    <link rel="icon" href="${contextPath}resources/imagens/favicon.png">
-  </head>
-  <body>    
-    
-
-    <section id="recursos" class="caixa">
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/vendor/bootstrap/css/bootstrap.min.css"></c:url>'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"></c:url>'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/vendor/animate/animate.css"></c:url>'>
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/vendor/css-hamburgers/hamburgers.min.css"></c:url>'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/vendor/animsition/css/animsition.min.css"></c:url>'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/vendor/select2/select2.min.css"></c:url>'>
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/vendor/daterangepicker/daterangepicker.css"></c:url>'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/css/util.css"></c:url>'>
+	<link rel="stylesheet" type="text/css" href='<c:url value = "/resources/css/login.css"></c:url>'>
+<!--===============================================================================================-->
+</head>
+<body>
+  <header><!-- inicio Cabecalho -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <br>
-            <br>
-            <br>
-            <h2>Entrar</h2>
-            <form>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Digite seu e-mail:</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Digite sua senha:</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
-                </div>
-                <small id="emailHelp" class="form-text text-muted"><p class="text-white">Esqueceu a senha&nbsp;&nbsp;<a class="text-dark" href="">click aqui</a></p></small>
-                <button type="button" class="btn btn-outline-light">Entrar</button>
-            </form>
+        
+        <a href="index.html" class="navbar-brand">
+          <img src='<c:url value = "/resources/imagens/faviconb.png"></c:url>' width="50">
+        </a>
 
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              
-              <div class="col">
-                <br>
-                <br>
-                <br>
-                <br>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+          <i class="fas fa-bars text-white"></i>
+        </button>
 
-                <img src="${contextPath}resources/imagens/img1-semfundo.png" width="500px" class="img-fluid">
-              </div>
-              
-            </div>
-          </div>
+        <div class="collapse navbar-collapse" id="nav-principal">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="" class="nav-link"></a>
+            </li>
+            
+            
+            
+          </ul>
         </div>
-      </div>
-    </section>
 
-<!-- inicio Rodape -->
-    <footer class="fixed-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-2">
-            <a href="index.html" title=""><img src="${contextPath}resources/imagens/h1.png" width="50"></a>
-          </div>
-          <div class="col-md-2">
-            <h4>company</h4>
-            <ul class="navbar-nav">
-              <li><a href="sobre.html">Sobre</a></li>
-            </ul>
-          </div>
-          <div class="col-md-2">
-            <h4>comunidades</h4>
-            <ul class="navbar-nav">
-              <li><a href="developer.html">Desenvolvedores</a></li>
-             
-            </ul>
-          </div>
-          <div class="col-md-2">
-            <h4>links uteis</h4>
-            <ul class="navbar-nav">
-              <li><a href="ajuda.html">Ajuda</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <ul>
-              <li>
-                <a href=""><img src="${contextPath}resources/imagens/facebook.png"></a>
-              </li>
-              <li>
-                <a href=""><img src="${contextPath}resources/imagens/twitter.png"></a>
-              </li>
-              <li>
-                <a href=""><img src="${contextPath}resources/imagens/instagram.png"></a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-    </footer>
+    </nav>
+  </header><!--/fim Cabecalho -->
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+				<form:form servletRelativeAction="/login" method="POST" class="login100-form validate-form">
+					<span class="login100-form-title p-b-33">
+						Entrar
+					</span>
 
-    <!-- JavaScript (Opcional) -->
-    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+					<div class="wrap-input100 validate-input" data-validate = "Requer um email válido">
+						<input class="input100" type="text" name="username" placeholder="Email">
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
+
+					<div class="wrap-input100 rs1 validate-input" data-validate="Requer uma senha">
+						<input class="input100" type="password" name="password" placeholder="Senha">
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-20">
+						<button type="submit" class="login100-form-btn">
+							Entrar
+						</button>
+					</div>
+
+					<div class="text-center p-t-45 p-b-4">
+						<span class="txt1">
+							Esqueceu sua
+						</span>
+
+						<a href="#" class="txt2 hov1">
+							senha?
+						</a>
+					</div>
+
+					<div class="text-center">
+						<span class="txt1">
+							Criar uma conta?
+						</span>
+
+						<a href="cadastro.html" class="txt2 hov1">
+							Inscrever-se
+						</a>
+					</div>
+				</form:form>
+			</div>
+		</div>
+  </div>
+  
+	
+
+	
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/vendor/jquery/jquery-3.2.1.min.js"></c:url>'></script>
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/vendor/animsition/js/animsition.min.js"></c:url>'></script>
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/vendor/bootstrap/js/popper.js"></c:url>'></script>
+	<script src='<c:url value = "/resources/vendor/bootstrap/js/bootstrap.min.js"></c:url>'></script>
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/vendor/select2/select2.min.js"></c:url>'></script>
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/vendor/daterangepicker/moment.min.js"></c:url>'></script>
+	<script src='<c:url value = "/resources/vendor/daterangepicker/daterangepicker.js"></c:url>'></script>
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/vendor/countdowntime/countdowntime.js"></c:url>'></script>
+<!--===============================================================================================-->
+	<script src='<c:url value = "/resources/js/main.js"></c:url>'></script>
+
+</body>
 </html>

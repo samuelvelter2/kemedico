@@ -5,22 +5,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.bson.types.ObjectId;
+import org.hibernate.search.annotations.Indexed;
 
 @Entity
+@Indexed
 public class Especializacao {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId idEsp;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long idEsp;
 	private String descEsp;
+	public Especializacao() {
+		super();
+	}
 	
 	
-	public ObjectId getIdEsp() {
-		return idEsp;
+	public Especializacao(String descEsp) {
+		super();
+		this.descEsp = descEsp;
 	}
-	public void setIdEsp(ObjectId idEsp) {
-		this.idEsp = idEsp;
-	}
+
+	
 	public String getDescEsp() {
 		return descEsp;
 	}
@@ -29,7 +33,17 @@ public class Especializacao {
 	}
 	@Override
 	public String toString() {
-		return "Especializacao [idEsp=" + idEsp.toString() + ", descEsp=" + descEsp + "]";
+		return "Especializacao [idEsp=" + idEsp + ", descEsp=" + descEsp + "]";
+	}
+
+
+	public void setIdEsp(long idEsp) {
+		this.idEsp = idEsp;
+	}
+
+
+	public long getIdEsp() {
+		return idEsp;
 	}
 	
 	

@@ -1,16 +1,18 @@
 package br.com.kemedico.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "Paciente")
 public class Paciente extends Usuario {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String rg;
+	@ManyToOne
+	private UF estadoPaciente;
+	
 	private String apelido;
 	public String getRg() {
 		return rg;
@@ -18,6 +20,28 @@ public class Paciente extends Usuario {
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}	
+
+	public UF getEstadoPaciente() {
+		return estadoPaciente;
+	}
+
+	public void setEstadoPaciente(UF estadoPaciente) {
+		this.estadoPaciente = estadoPaciente;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public Paciente getAtualizado(Paciente pc) {
+		if (this.estadoPaciente == null) {
+			this.estadoPaciente = pc.getEstadoPaciente();			
+		}
+		if(this.rg == null) {
+			this.rg = pc.getRg();
+		}
+		super.getAtualizado(pc);
+		return this;
 	}
 
 	public String getApelido() {

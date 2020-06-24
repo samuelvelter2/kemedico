@@ -8,22 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import org.bson.types.ObjectId;
-
 @Entity
 public class Foto {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private ObjectId idFoto;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long idFoto;
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] fotoConteudo;
-	public ObjectId getIdFoto() {
-		return idFoto;
-	}
-	public void setIdFoto(ObjectId idFoto) {
-		this.idFoto = idFoto;
-	}
+	
 	public byte[] getFoto() {
 		return fotoConteudo;
 	}
@@ -35,6 +28,16 @@ public class Foto {
 		foto.setFoto(fotoConteudo);
 		return foto;
 		
+	}
+	public long getIdFoto() {
+		return idFoto;
+	}
+	public void setIdFoto(long idFoto) {
+		this.idFoto = idFoto;
+	}
+	@Override
+	public String toString() {
+		return "Foto [idFoto=" + idFoto + "]";
 	}
 	
 
