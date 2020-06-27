@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.kemedico.daos.AvaliacaoDAO;
 import br.com.kemedico.daos.ClinicaDAO;
 import br.com.kemedico.daos.EspecializacaoDAO;
 import br.com.kemedico.daos.FotoDAO;
@@ -52,6 +53,8 @@ public class ClinicaController {
 	ClinicaDAO cldao;
 	@Autowired
 	FotoDAO fdao;
+	@Autowired
+	AvaliacaoDAO avdao;
 
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -143,6 +146,7 @@ public class ClinicaController {
 	public ModelAndView clinica(@PathVariable("id")Long id) {
 		ModelAndView view = new ModelAndView("clinica");		
 		view.addObject("clinica", cldao.getById(id));
+		view.addObject("avaliacoes", avdao.getAllByAvaliatedClinica(cldao.getById(id)));
 		return view;
 		
 	}

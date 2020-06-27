@@ -80,146 +80,116 @@
 			method="get">
 			<hr class="col-md-4">
 			<!--Filtro-->
-			<input type="text" value="${pesquisa.cidade.idCidade}" hidden="true" name="cidade.idCidade">
-			<input type="text" value="${pesquisa.tipoPesquisa}" hidden="true" name="tipoPesquisa">
-			<input type="text" value="${pesquisa.especialidade.idEsp}" hidden="true" name="especialidade.idEsp">
-			<div class="container form-inline float-none"
+			<input type="text" value="${pesquisa.cidade.idCidade}" hidden="true"
+				name="cidade.idCidade">
+			<input type="text" value="${pesquisa.tipoPesquisa}" hidden="true"
+				name="tipoPesquisa">
+			<input type="text" value="${pesquisa.especialidade.idEsp}"
+				hidden="true" name="especialidade.idEsp">
+			<div class="container float-none form-inline"
 				style="background-color: #007bff">
-				<p class="text-dark bg-light m-3 p-3">FILTROS</p>
 
-				<div class="dropdown  m-3">
-					<button class="btn btn-primary dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">Métodos de
-						Pagamento</button>
-					<div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-						<form:select id="select-meios" path="meios" class="custom-select"
-							name="planos" multiple="true" itemLabel="selecione pelo menos um"
-							onclick="event.stopPropagation();">
-							<c:forEach items="${pesquisa.meios}" var="meio">
-								<option value="${meio.idMeio}" label="${meio.descMeio}"
-									selected="selected"></option>
-							</c:forEach>
-							<form:options items="${meios}" itemValue="idMeio"
-								itemLabel="descMeio" />
-						</form:select>
-						<div class="text-center">
-							<hr>
-							<button type="submit" class="btn btn-primary col-sm-6  ">Aplicar</button>
-						</div>
 
-					</div>
+				<div class="col-md-3 form-group">
+					<label class="text-white" for="select-meios">Meios de
+						Pagamento:</label>
+					<form:select id="select-meios" path="meios" class="form-control"
+						multiple="true" itemLabel="selecione pelo menos um">
+						<form:options items="${meios}" itemValue="idMeio"
+							itemLabel="descMeio" />
+					</form:select>
 				</div>
-				<div class="dropdown m-3 ">
-					<button class="btn btn-primary dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">Convenios</button>
-					<div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-						<form:select multiple="true" class="custom-select"
-							id="select-plano" path="planos"
-							onclick="event.stopPropagation();">
-							<c:forEach items="${pesquisa.planos }" var="plano">
-								<option value="${plano.id }" selected="selected"></option>
-							</c:forEach>
-							<form:options class="text-centered" items="${planos}"
-								itemValue="id" itemLabel="nomePlano"></form:options>
-						</form:select>
-						<div class="text-center">
-							<hr>
-							<button type="submit" class="btn btn-primary col-sm-6  ">Aplicar</button>
-						</div>
 
 
 
-					</div>
+				<div class="col-md-3 form-group">
+					<label class="text-white" for="select-plano">Planos de
+						Saúde:</label>
+					<form:select multiple="true" class="form-control" id="select-plano"
+						path="planos">
 
+						<form:options class="text-centered" items="${planos}"
+							itemValue="id" itemLabel="nomePlano"></form:options>
+					</form:select>
 				</div>
-				<div class="dropdown m-3">
-					<button class="btn btn-primary dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">Bairros</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<form:select multiple="true" class="custom-select"
-							id="select-bairro" path="planos"
-							onclick="event.stopPropagation();">
-							<c:forEach items="${pesquisa.bairros }" var="bairro">
-								<option value="${bairro.idBairro }" selected="selected"></option>
-							</c:forEach>
-							<form:options class="text-centered" items="${bairros}"
-								itemValue="idBairro" itemLabel="nomeBairro"></form:options>
-						</form:select>
-						<div class="text-center">
-							<hr>
-							<button type="submit" class="btn btn-primary col-sm-6  ">Aplicar</button>
-						</div>
-
-					</div>
 
 
 
+
+				<div class="col-md-3 form-group">
+					<label for="select-bairro" class="text-white">Bairros
+						Encontrados:</label>
+					<form:select multiple="true" class="form-control"
+						id="select-bairro" path="bairros">
+
+						<form:options items="${bairros}" itemValue="idBairro"
+							itemLabel="nomeBairro"></form:options>
+					</form:select>
 				</div>
-				<div class="dropdown m-3">
-					<button class="btn btn-primary dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">Ordenar por:</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<select name="order" class="custom-select"
-							onclick="event.stopPropagation();">
-							<option label="---Selecione um:---" disabled="disabled"
-								selected="selected">
-							<option value="av" label="Avaliações"></option>
-							<option value="pc" label="Preço da Consulta"></option>
-						</select>
-						<div class="text-center">
-							<hr>
-							<button type="submit" class="btn btn-primary col-sm-6  ">Aplicar</button>
-						</div>
-
-					</div>
 
 
 
+
+
+
+
+
+				<div class="col-md-3 form-group">
+					<label class="text-white">Ordenar por:</label>
+					<form:select path="order" class="form-control">
+						<option label="---Selecione um:---" disabled="disabled"
+							selected="selected"></option>
+						<option value="${pesquisa.order}"></option>
+						<form:option value="av" label="Avaliações"></form:option>
+						<form:option value="pc" label="Preço da Consulta"></form:option>
+					</form:select>
 				</div>
+				<button type="submit" class="btn btn-success m-3">Aplicar</button>
+
 			</div>
 		</form:form>
 		<div class="container">
 			<div class="row heading heading-icon">
-				<c:if test="${not empty pesquisa}"></c:if>
-				<h3 class="text-white p-5">${pesquisa.especialidade.descEsp} em
-					${pesquisa.cidade.nomeCidade}</h3>
-
+				<c:if test="${not empty pesquisa}">
+					<h3 class="text-white p-5">${pesquisa.especialidade.descEsp}&nbsp;em
+						${pesquisa.cidade.nomeCidade}</h3>
+				</c:if>
 			</div>
 			<ul class="row">
-				<c:if test="${not empty resultado.resultados}">
-					<c:forEach items="${resultado.resultados}" var="profSaude">
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 420px;">
-								<c:if test="${profSaude.premium}">
-									<h5 style="color: #FFD700;">Premium</h5>
-								</c:if>
-								<figure>
-									<img
-										src="${s:mvcUrl('foto').arg(0,profSaude.fotoPerfil.idFoto).build()}"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="${s:mvcUrl('prof_saude').arg(0,profSaude.id).build()}">Dr.
-										${profSaude.nomeCompleto}</a>
-								</h3>
-								<h5>${pesquisa.especialidade.descEsp}</h5>
-								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fas fa-map-marker-alt"></i>&nbsp;
-											${profSaude.bairro.nomeBairro} ,
-											${profSaude.cidade.nomeComUF}</a></li>
-								</ul>
-								<i class="fa fa-star" style="color: #FFD700; font-size: 35px"></i> 4,2
-								<fmt:formatNumber maxFractionDigits="2"
-									value="${profSaude.mediaAvaliada }"></fmt:formatNumber>
-
-							</div>
-						</li>
-					</c:forEach>
+				<c:if test="${empty resultado.resultados}">
+					<h4>Sem resultados</h4>
 				</c:if>
+				<c:forEach items="${resultado.resultados}" var="profSaude">
+					<li class="col-12 col-md-6 col-lg-3">
+						<div class="cnt-block equal-hight" style="height: 420px;">
+							<c:if test="${profSaude.premium}">
+								<h5 style="color: #FFD700;">Premium</h5>
+							</c:if>
+							<figure>
+								<img
+									src="${s:mvcUrl('foto').arg(0,profSaude.fotoPerfil.idFoto).build()}"
+									class="img-responsive" alt="">
+							</figure>
+							<h3>
+								<a href="${s:mvcUrl('prof_saude').arg(0,profSaude.id).build()}">Dr.
+									${profSaude.nomeCompleto}</a>
+							</h3>
+							<h5>${pesquisa.especialidade.descEsp}</h5>
+							<ul class="follow-us clearfix">
+								<li><a href="#"><i class="fas fa-map-marker-alt"></i>&nbsp;
+										${profSaude.bairro.nomeBairro} , ${profSaude.cidade.nomeComUF}</a></li>
+							</ul>
+							<i class="fa fa-star" style="color: #FFD700; font-size: 35px"></i>
+							<c:if test="${empty profSaude.mediaAvaliada}">N/A</c:if>
+							<fmt:formatNumber maxFractionDigits="2"
+								value="${profSaude.mediaAvaliada }"></fmt:formatNumber>
+
+						</div>
+					</li>
+				</c:forEach>
+
+
+
 			</ul>
 			<!--<div class="dropdown">
                       <button onclick="myFunction()" class="dropbtn">Dropdown</button>

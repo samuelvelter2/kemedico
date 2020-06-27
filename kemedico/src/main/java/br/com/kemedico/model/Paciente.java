@@ -51,4 +51,9 @@ public class Paciente extends Usuario {
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
+
+	@Override
+	public String toString() {
+		return "Paciente [rg=" + rg + ", estadoPaciente=" + estadoPaciente + ", apelido=" + apelido + "]";
+	}
 }

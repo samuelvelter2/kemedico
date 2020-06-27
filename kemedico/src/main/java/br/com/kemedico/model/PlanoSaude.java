@@ -6,11 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.search.annotations.Indexed;
-
 @Entity
 @Embeddable
-@Indexed
+
 public class PlanoSaude {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)

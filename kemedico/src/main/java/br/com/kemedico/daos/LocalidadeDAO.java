@@ -1,5 +1,6 @@
 package br.com.kemedico.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -130,6 +131,21 @@ public class LocalidadeDAO {
 	public List<Bairro> getBairrosByCidade(Cidade c) {
 		return manager.createQuery("from Bairro where cidade = :cidade", Bairro.class).setParameter("cidade", c)
 				.getResultList();
+	}
+
+	public Bairro getBairroById(Long id) {
+		return manager.createQuery("from Bairro where idBairro = :id", Bairro.class).setParameter("id", id).getSingleResult();
+	}
+
+	public List<Bairro> getBairrosByIds(List<Bairro> lista) {
+		ArrayList<Bairro> bairros = new ArrayList<Bairro>();
+		if (lista != null) {
+			for (int i = 0; i < lista.size(); i++) {
+				bairros.add(getBairroById(lista.get(i).getIdBairro()));
+			}
+		}
+		return bairros;
+
 	}
 
 }

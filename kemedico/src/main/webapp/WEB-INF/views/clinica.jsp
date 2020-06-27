@@ -70,7 +70,7 @@
 
 							<tr>
 								<th scope="row">Telefone:</th>
-								<td>${clinica.numeroLocal}</td>
+								<td>${clinica.numeroFixo}</td>
 
 							</tr>
 							<c:if test="${clinica.premium}">
@@ -110,6 +110,75 @@
 
 		</div>
 
+	</section>
+	<section id="home" class="d-flex">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-8">
+
+					<br>
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="jumbotron " style="background-color: white">
+								<sec:authorize access="isAuthenticated()">
+									<h2 class="m-3">Avalie:</h2>
+									<p>1 - Muito Ruim | 2 -Ruim | 3 - Regular | 4 - Bom | 5 -
+										Muito Bom</p>
+									<hr class="my-4">
+									<div class="form-row">
+										<div class="col-md-5">
+											<form:form
+												servletRelativeAction="${s:mvcUrl('av_cli').build()}">
+												<input name="clinica.id" value="${clinica.id }"
+													hidden="true">
+												<div class="estrelas text-center col-md-12">
+													<label for="validationDefault01">Quão satisfeito
+														está com esse especialista?</label> <label for="cm_star-1">1<i
+														class="fa"></i></label> <input type="radio" id="cm_star-1"
+														name="estrelas" value="1"> <label for="cm_star-2">2<i
+														class="fa"></i></label> <input type="radio" id="cm_star-2"
+														name="estrelas" value="2"> <label for="cm_star-3">3<i
+														class="fa"></i></label> <input type="radio" id="cm_star-3"
+														name="estrelas" value="3"> <label for="cm_star-4">4<i
+														class="fa"></i></label> <input type="radio" id="cm_star-4"
+														name="estrelas" value="4"> <label for="cm_star-5">5<i
+														class="fa"></i></label> <input type="radio" id="cm_star-5"
+														name="estrelas" value="5">
+												</div>
+												<label for="validationDefault01">Comentário</label>
+												<input id="comentario" name="comentario"
+													placeholder="Ex.:Gostei dele, muito gentil"
+													class="form-control input-md" type="text" required>
+
+												<button type="submit"
+													class="btn btn-outline-primary  col-md-12">Avaliar</button>
+											</form:form>
+										</div>
+
+
+									</div>
+								</sec:authorize>
+								<sec:authorize access="!isAuthenticated()">
+								<b>É necessário estar logado para avaliar!</b>
+								</sec:authorize>
+
+
+								<h2 class="m-3">Avaliações:</h2>
+								<c:forEach items="${avaliacoes}" var="avalia">
+									<b>${avalia.paciente.apelido.toString()}</b>
+									<p>${avalia.estrelas}<i class="fa fa-star" style="color: #FFD700; font-size: 25px"></i></p>
+							<p>${avalia.comentario}</p>
+								</c:forEach>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</section>
 
 	<%@ include file="/WEB-INF/views/rodape.jsp"%>

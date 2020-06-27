@@ -23,7 +23,10 @@ import br.com.kemedico.daos.LocalidadeDAO;
 import br.com.kemedico.daos.PagamentoDAO;
 import br.com.kemedico.daos.PlanoSaudeDAO;
 import br.com.kemedico.daos.ProfSaudeDAO;
+import br.com.kemedico.model.Bairro;
 import br.com.kemedico.model.Clinica;
+import br.com.kemedico.model.Especializacao;
+import br.com.kemedico.model.MeioPagamento;
 import br.com.kemedico.model.Paciente;
 import br.com.kemedico.model.PlanoSaude;
 import br.com.kemedico.model.ProfissionalSaude;
@@ -56,6 +59,10 @@ public class PesquisaController {
 			Resultado<ProfissionalSaude> resultado = pfdao.getFiltrados(pesquisa.getPlanos(), pesquisa.getCidade(),
 					pesquisa.getBairros(), pesquisa.getMeios(), pesquisa.getEspecialidade(), pesquisa.getOrder(), 20,
 					0);
+			System.out.println(pesquisa.getBairros());
+			pesquisa.setBairros(ldao.getBairrosByIds(pesquisa.getBairros()));
+			pesquisa.setMeios(pdao.getAllByIds(pesquisa.getMeios()));
+			pesquisa.setPlanos(psdao.getAllByIds(pesquisa.getPlanos()));
 			pesquisa.setCidade(ldao.getCidadeById(pesquisa.getCidade().getIdCidade()));
 			pesquisa.setEspecialidade(espdao.getById(pesquisa.getEspecialidade().getIdEsp()));
 			view.addObject("planos", psdao.lista());
@@ -69,6 +76,9 @@ public class PesquisaController {
 		if (pesquisa.getTipoPesquisa().equals("cli")) {
 			Resultado<Clinica> resultado = cdao.getFiltrados(pesquisa.getPlanos(), pesquisa.getCidade(),
 					pesquisa.getBairros(), pesquisa.getMeios(), pesquisa.getEspecialidade(),pesquisa.getOrder(), 20, 0);
+			pesquisa.setBairros(ldao.getBairrosByIds(pesquisa.getBairros()));
+			pesquisa.setMeios(pdao.getAllByIds(pesquisa.getMeios()));
+			pesquisa.setPlanos(psdao.getAllByIds(pesquisa.getPlanos()));
 			pesquisa.setCidade(ldao.getCidadeById(pesquisa.getCidade().getIdCidade()));
 			pesquisa.setEspecialidade(espdao.getById(pesquisa.getEspecialidade().getIdEsp()));
 			view.addObject("planos", psdao.lista());
@@ -105,7 +115,26 @@ public class PesquisaController {
 	}
 
 	@InitBinder
-	protected void initBinder(WebDataBinder binder) throws Exception {
+	protected void initBinder1(WebDataBinder binder) throws Exception {
+		CustomCollectionEditor planosCollector = new CustomCollectionEditor(List.class) {
+			@Override
+			protected Object convertElement(Object element) {
+				if (element instanceof String) {
+					Long id = Long.parseLong(element.toString());
+
+					Especializacao esp = new Especializacao();
+					esp.setIdEsp(id);
+					return esp;
+				}
+				throw new RuntimeException("Spring says: Não sei o que fazer com esse elemento: " + element);
+			}
+
+		};
+		binder.registerCustomEditor(List.class, "especialidades", planosCollector);
+	}
+
+	@InitBinder
+	protected void initBinder2(WebDataBinder binder) throws Exception {
 		CustomCollectionEditor planosCollector = new CustomCollectionEditor(List.class) {
 			@Override
 			protected Object convertElement(Object element) {
@@ -122,5 +151,43 @@ public class PesquisaController {
 		};
 		binder.registerCustomEditor(List.class, "planos", planosCollector);
 	}
+
+	@InitBinder
+	protected void initBinder3(WebDataBinder binder) throws Exception {
+		CustomCollectionEditor meiosCollector = new CustomCollectionEditor(List.class) {
+			@Override
+			protected Object convertElement(Object element) {
+				if (element instanceof String) {
+					Long id = Long.parseLong(element.toString());
+
+					MeioPagamento mp = new MeioPagamento();
+					mp.setIdMeio(id);
+					return mp;
+				}
+				throw new RuntimeException("Spring says: Não sei o que fazer com esse elemento: " + element);
+			}
+
+		};
+		binder.registerCustomEditor(List.class, "meios", meiosCollector);
+	}
+	@InitBinder
+	protected void initBinder4(WebDataBinder binder) throws Exception {
+		CustomCollectionEditor bairrosCollector = new CustomCollectionEditor(List.class) {
+			@Override
+			protected Object convertElement(Object element) {
+				if (element instanceof String) {
+					Long id = Long.parseLong(element.toString());
+
+					Bairro b = new Bairro();
+					b.setIdBairro(id);
+					return b;
+				}
+				throw new RuntimeException("Spring says: Não sei o que fazer com esse elemento: " + element);
+			}
+
+		};
+		binder.registerCustomEditor(List.class, "bairros", bairrosCollector);
+	}
+	
 
 }

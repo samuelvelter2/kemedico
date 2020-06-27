@@ -20,32 +20,22 @@ public class ProfissionalSaude extends Usuario {
 	private static final long serialVersionUID = 1L;
 	private String crm;
 	@ManyToOne
-	
 	private Especializacao especializacao1;
 	@ManyToOne
-	
 	private Especializacao especializacao2;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Clinica> clinicas;
 	@OneToOne
 	private Foto fotoPerfil;
-
 	private String CEP;
-
 	@ManyToOne
 	private Cidade cidade;
-
 	@ManyToOne
 	private Bairro bairro;
-
 	private String rua;
-
 	private String numero;
-
 	private String complemento;
-
 	private String nomeConsultorio;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<PlanoSaude> planosParticular;
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -55,7 +45,6 @@ public class ProfissionalSaude extends Usuario {
 	@ManyToOne
 	private PrecoCifrao cifroes;
 	private Double mediaAvaliada;
-
 	private boolean premium;
 
 	public String getCrm() {
@@ -182,15 +171,6 @@ public class ProfissionalSaude extends Usuario {
 		this.fotosConsultorio = fotosConsultorio;
 	}
 
-	@Override
-	public String toString() {
-		return "ProfissionalSaude [crm=" + crm + ", especializacao1=" + especializacao1 + ", especializacao2="
-				+ especializacao2 + ", clinicas=" + clinicas + ", fotoPerfil=" + fotoPerfil + ", CEP=" + CEP
-				+ ", cidade=" + cidade + ", bairro=" + bairro + ", rua=" + rua + ", numero=" + numero + ", complemento="
-				+ complemento + ", planosParticular=" + planosParticular + ", meiosPagamento=" + meiosPagamento
-				+ ", cifroes=" + cifroes + ", premium=" + premium + "[" + super.toString() + "]";
-	}
-
 	public String getNomeConsultorio() {
 		return nomeConsultorio;
 	}
@@ -258,6 +238,7 @@ public class ProfissionalSaude extends Usuario {
 	public PrecoCifrao getCifroes() {
 		return cifroes;
 	}
+
 	public int getCifroesInt() {
 		return cifroes.getCifroes();
 	}
@@ -268,6 +249,16 @@ public class ProfissionalSaude extends Usuario {
 
 	public void setMediaAvaliada(Double mediaAvaliada) {
 		this.mediaAvaliada = mediaAvaliada;
+	}
+
+	@Override
+	public String toString() {
+		return "ProfissionalSaude [crm=" + crm + ", especializacao1=" + especializacao1 + ", especializacao2="
+				+ especializacao2 + ", clinicas=" + clinicas + ", fotoPerfil=" + fotoPerfil + ", CEP=" + CEP
+				+ ", cidade=" + cidade + ", bairro=" + bairro + ", rua=" + rua + ", numero=" + numero + ", complemento="
+				+ complemento + ", nomeConsultorio=" + nomeConsultorio + ", planosParticular=" + planosParticular
+				+ ", meiosPagamento=" + meiosPagamento + ", fotosConsultorio=" + fotosConsultorio + ", cifroes="
+				+ cifroes + ", mediaAvaliada=" + mediaAvaliada + ", premium=" + premium + "]";
 	}
 
 }

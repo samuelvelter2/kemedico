@@ -16,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -26,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Indexed
 public class Usuario implements UserDetails{
 	
 	public Usuario(String email, String senha, String nomeCompleto, String numeroCelular, LocalDate dataNascimento,
@@ -50,24 +46,16 @@ public class Usuario implements UserDetails{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)	
-	private long id;
-	@Field
+	private long id;	
 	private String email;
-	@Field
-	private String senha;
-	@Field
-	private String nomeCompleto;
-	@Field
-	private String numeroCelular;
-	@Field
-	private LocalDate dataNascimento;
-	@Field
+	private String senha;	
+	private String nomeCompleto;	
+	private String numeroCelular;	
+	private LocalDate dataNascimento;	
 	private String numeroCpf;	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@IndexedEmbedded
+	@ManyToOne(fetch = FetchType.EAGER)	
 	private TipoUsuario tipoUsuario;
 	@OneToMany(fetch = FetchType.EAGER)
-	@IndexedEmbedded
 	private List<Role> roles =  new ArrayList<Role>();
 
 	public String getEmail() {

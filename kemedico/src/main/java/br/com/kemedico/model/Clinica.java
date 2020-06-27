@@ -32,8 +32,7 @@ public class Clinica extends Usuario{
 	@OneToOne
 	private Foto fotoPerfil;
 	@OneToMany(fetch = FetchType.EAGER)
-	private List<Foto> fotosClinica;
-	
+	private List<Foto> fotosClinica;	
 	@OneToOne
 	private ProfissionalSaude profResp;
 	@ManyToMany(fetch = FetchType.EAGER)

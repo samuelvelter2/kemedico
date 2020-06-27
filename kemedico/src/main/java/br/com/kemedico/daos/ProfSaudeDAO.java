@@ -69,7 +69,7 @@ public class ProfSaudeDAO {
 
 		}
 		if (meios != null) {
-			if (meios.size()>=1) {
+			if (!meios.isEmpty()) {
 
 				builder.append("meiosPagamento:");
 				builder.append("{$in:");
@@ -91,18 +91,20 @@ public class ProfSaudeDAO {
 			builder.append(",");
 		}
 		if (br != null) {
-			builder.append("bairro_idBairro:");
-			builder.append("{$in:");
-			builder.append("[");
-			for (int i = 0; i < br.size(); i++) {
-				builder.append(br.get(i).getIdBairro());
-				if (i < br.size() - 1) {
-					builder.append(",");
+			if (!br.isEmpty()) {
+				builder.append("bairro_idBairro:");
+				builder.append("{$in:");
+				builder.append("[");
+				for (int i = 0; i < br.size(); i++) {
+					builder.append(br.get(i).getIdBairro());
+					if (i < br.size() - 1) {
+						builder.append(",");
+					}
 				}
+				builder.append("]");
+				builder.append("}");
+				builder.append(",");
 			}
-			builder.append("]");
-			builder.append("}");
-			builder.append(",");
 		}
 
 		if (esp != null) {

@@ -30,18 +30,23 @@ public class ClinicaDAO {
 	public List<Clinica> lista() {
 		return entityManager.createQuery("select C from Clinica C", Clinica.class).getResultList();
 	}
+
 	public Clinica getById(long id) {
-		return entityManager.createQuery("from Clinica where id = :id", Clinica.class).setParameter("id",id).getSingleResult();
+		return entityManager.createQuery("from Clinica where id = :id", Clinica.class).setParameter("id", id)
+				.getSingleResult();
 	}
+
 	public void update(Clinica cli) {
 		entityManager.merge(cli);
 	}
+
 	@SuppressWarnings("unchecked")
 	public Resultado<Clinica> getFiltrados(List<PlanoSaude> planos, Cidade cd, List<Bairro> br,
-			List<MeioPagamento> meios, Especializacao esp,String order, int quantidadePagina, int pagina) {
+			List<MeioPagamento> meios, Especializacao esp, String order, int quantidadePagina, int pagina) {
 		Resultado<Clinica> result = new Resultado<>();
 		StringBuilder builder = new StringBuilder();
 		builder.append("db.Usuario.find({");
+		builder.append("$query:{");
 		if (planos != null) {
 			if (!planos.isEmpty()) {
 				builder.append("planos:");
@@ -60,18 +65,21 @@ public class ClinicaDAO {
 
 		}
 		if (meios != null) {
-			builder.append("meiosPagamento:");
-			builder.append("{$in:");
-			builder.append("[");
-			for (int i = 0; i < meios.size(); i++) {
-				builder.append(meios.get(i).getIdMeio());
-				if (i < br.size() - 1) {
-					builder.append(",");
+			if (!meios.isEmpty()) {
+
+				builder.append("meiosPagamento:");
+				builder.append("{$in:");
+				builder.append("[");
+				for (int i = 0; i < meios.size(); i++) {
+					builder.append(meios.get(i).getIdMeio());
+					if (i < br.size() - 1) {
+						builder.append(",");
+					}
 				}
+				builder.append("]");
+				builder.append("}");
+				builder.append(",");
 			}
-			builder.append("]");
-			builder.append("}");
-			builder.append(",");
 		}
 		if (cd != null) {
 			builder.append("cidade_idCidade:");
@@ -79,26 +87,42 @@ public class ClinicaDAO {
 			builder.append(",");
 		}
 		if (br != null) {
-			builder.append("bairro_idBairro:");
-			builder.append("{$in:");
-			builder.append("[");
-			for (int i = 0; i < br.size(); i++) {
-				builder.append(br.get(i).getIdBairro());
-				if (i < br.size() - 1) {
-					builder.append(",");
+			if (!br.isEmpty()) {
+
+				builder.append("bairro_idBairro:");
+				builder.append("{$in:");
+				builder.append("[");
+				for (int i = 0; i < br.size(); i++) {
+					builder.append(br.get(i).getIdBairro());
+					if (i < br.size() - 1) {
+						builder.append(",");
+					}
 				}
+				builder.append("]");
+				builder.append("}");
+				builder.append(",");
 			}
-			builder.append("]");
-			builder.append("}");
-			builder.append(",");
 		}
 
 		if (esp != null) {
 			builder.append("especialidades:");
 			builder.append(esp.getIdEsp());
-			
 
 		}
+		builder.append("}");
+		builder.append(",");
+		builder.append("$orderby:{");
+		builder.append("premium:-1");
+		if (order != null) {
+			builder.append(",");
+			if (order.equals("av")) {
+				builder.append("mediaAvaliada:-1");
+			}
+			if (order.equals("pc")) {
+				builder.append("cifroes_cifroes:1");
+			}
+		}
+		builder.append("}");
 		builder.append("}");
 
 		builder.append(")");

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.kemedico.daos.AvaliacaoDAO;
 import br.com.kemedico.daos.EspecializacaoDAO;
 import br.com.kemedico.daos.FotoDAO;
 import br.com.kemedico.daos.LocalidadeDAO;
@@ -59,6 +60,8 @@ public class ProfSaudeController {
 	TipoUsuarioDAO tpdao;
 	@Autowired
 	RoleDAO rldao;
+	@Autowired
+	AvaliacaoDAO avdao;
 
 	// Cadastro Profissonal da Saude
 	@RequestMapping(value = "/cadastro/profsaude", name = "cad_prof", method = RequestMethod.GET)
@@ -147,6 +150,8 @@ public class ProfSaudeController {
 		
 		ModelAndView modelAndView = new ModelAndView("profsaude");
 		modelAndView.addObject("profsau", profdao.getById(id));
+		modelAndView.addObject("avaliacoes", avdao.getAllByIdOfAvaliated(profdao.getById(id)));
+		System.out.println(avdao.getAllByIdOfAvaliated(profdao.getById(id)));
 		return modelAndView;
 	}
 	@InitBinder

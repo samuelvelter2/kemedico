@@ -55,5 +55,9 @@ public class Bairro {
 	public void setIdBairro(long idBairro) {
 		this.idBairro = idBairro;
 	}
+	@Override
+	public String toString() {
+		return "Bairro [idBairro=" + idBairro + ", nomeBairro=" + nomeBairro + ", cidade=" + cidade + "]";
+	}
 
 }

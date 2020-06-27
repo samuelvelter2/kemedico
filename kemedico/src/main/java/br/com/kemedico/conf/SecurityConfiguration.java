@@ -22,9 +22,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/cadastro/**").permitAll().antMatchers("/login/").permitAll()
 				.antMatchers("/premium/beneficios").permitAll().antMatchers(HttpMethod.GET, "/pesquisa/*").permitAll()
 				.antMatchers(HttpMethod.POST, "/pesquisa/*").permitAll().antMatchers("/profsaude/*").permitAll()
-				.antMatchers("/media/imagem/**").permitAll().antMatchers("/minhaconta/***").authenticated()
-				.antMatchers("/*").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.failureForwardUrl("/cadastro").defaultSuccessUrl("/").permitAll().and().logout()
+				.antMatchers("/clinica/*").permitAll().antMatchers("/media/imagem/**").permitAll()
+				.antMatchers("/minhaconta/***").authenticated().antMatchers("/*").permitAll().anyRequest()
+				.authenticated().and().formLogin().loginPage("/login").failureForwardUrl("/cadastro")
+				.defaultSuccessUrl("/").permitAll().and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().logoutSuccessUrl("/login");
 
 	}

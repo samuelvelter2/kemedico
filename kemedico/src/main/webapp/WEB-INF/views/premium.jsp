@@ -89,11 +89,11 @@
 							<tr>
 								<th scope="row">Mensalidade</th>
 								<td><p>
-										R$ 0,00/Por mês<br> <a href="c-especialista.html"
+										R$ 0,00/Por mês<br> <a href="${s:mvcUrl('cadastro').build()}"
 											type="button" class="btn btn-outline-primary">Cadastrar</a>
 									</p></td>
 								<td><p>
-										R$ 10,00/Por mês<br> <a href="c-especialista.html"
+										R$ 10,00/Por mês<br> <a href="${s:mvcUrl('cadastro').build()}"
 											type="button" class="btn btn-outline-primary">Cadastrar</a>
 									</p></td>
 							</tr>
