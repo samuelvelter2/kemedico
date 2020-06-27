@@ -150,8 +150,8 @@ public class ProfSaudeController {
 		
 		ModelAndView modelAndView = new ModelAndView("profsaude");
 		modelAndView.addObject("profsau", profdao.getById(id));
-		modelAndView.addObject("avaliacoes", avdao.getAllByIdOfAvaliated(profdao.getById(id)));
-		System.out.println(avdao.getAllByIdOfAvaliated(profdao.getById(id)));
+		modelAndView.addObject("avaliacoes", avdao.getAllByAvaliatedProfissionalSaude(profdao.getById(id)));
+		System.out.println(avdao.getAllByAvaliatedProfissionalSaude(profdao.getById(id)));
 		return modelAndView;
 	}
 	@InitBinder
